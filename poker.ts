@@ -4,6 +4,7 @@ export type Color = 'Cœur' | 'Carreau' | 'Trèfle' | 'Pique';
 export interface Card {
   rank: Rank;
   color: Color;
+  value: number;
 }
 
 export interface Player {
@@ -18,13 +19,28 @@ export interface PokerGame {
 
 export const colors: Color[] = ['Cœur', 'Carreau', 'Trèfle', 'Pique'];
 export const ranks: Rank[] = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'Valet', 'Dame', 'Roi', 'As'];
+export const rankValues: { [key in Rank]: number } = {
+  '2': 2,
+  '3': 3,
+  '4': 4,
+  '5': 5,
+  '6': 6,
+  '7': 7,
+  '8': 8,
+  '9': 9,
+  '10': 10,
+  'Valet': 11,
+  'Dame': 12,
+  'Roi': 13,
+  'As': 14
+};
 
 export function initDeck(): Card[] {  
   let deck: Card[] = [];
   
   colors.forEach(color => {
     ranks.forEach(rank => {
-      deck.push({ rank, color });
+      deck.push({ rank, color, value: rankValues[rank] });
     });
   });
   
@@ -61,4 +77,14 @@ export function distribution(playersNumber: number): PokerGame {
   const pokerGame: PokerGame = {players, shuffledDeck};
 
   return pokerGame;
+}
+
+export function isOnePair(hand: Card[]): boolean {
+  const ranksCount: { [key in Rank]: number } = { '2': 0, '3': 0, '4': 0, '5': 0, '6': 0, '7': 0, '8': 0, '9': 0, '10': 0, 'Valet': 0, 'Dame': 0, 'Roi': 0, 'As': 0 };
+  
+  hand.forEach(card => {
+    ranksCount[card.rank]++;
+  });
+  
+  return Object.values(ranksCount).includes(2);
 }
