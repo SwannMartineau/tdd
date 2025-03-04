@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/SwannMartineau/tdd#readme",
   "devDependencies": {
-    "jest": "^29.7.0"
+    "@jest/globals": "^29.7.0",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.6"
   }
 }
