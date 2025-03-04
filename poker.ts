@@ -48,6 +48,9 @@ export function distribution(playersNumber: number): PokerGame {
   let players: Player[] = [];
 
   for (let i = 0; i < playersNumber; i++) {
+    if (shuffledDeck.length < 5) {
+        throw new Error('Not enough card in the deck for the number of players');
+    }
     let player: Player = { id: i + 1, cards: [] };
     for (let j = 0; j < 5; j++) {
       player.cards.push(shuffledDeck.pop()!);

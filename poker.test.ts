@@ -48,12 +48,16 @@ describe('verify the cards', () => {
 
 });
 
-describe('verify the cards after distribution for 2 players', () => {
+describe('verify the cards after distribution for a number of players', () => {
 
   const player1: Player = {id: 1, cards: [{color: 'Carreau', rank: '10'}, {color: 'Carreau', rank: '4'}, 
     {color: 'Pique', rank: 'As'}, {color: 'Carreau', rank: 'Valet'}, {color: 'Carreau', rank: '2'}]}
   const player2: Player = {id: 2, cards: [{color: 'Pique', rank: 'Dame'}, {color: 'Pique', rank: 'Roi'}, 
     {color: 'Pique', rank: 'As'}, {color: 'Pique', rank: 'Valet'}, {color: 'Pique', rank: '10'}]}
+
+  it('Should return an error if there are not enough cards in the deck', () => {
+    expect(() => distribution(11)).toThrowError('Not enough card in the deck for the number of players');
+  })
 
   it('Verify that there are 42 cards in the deck and 5 per players', () => {
     expect(distribution(2).players[0].cards.length).toEqual(player1.cards.length);
@@ -62,5 +66,4 @@ describe('verify the cards after distribution for 2 players', () => {
     expect(distribution(2).players[1].id).toEqual(player2.id);
     expect(distribution(2).shuffledDeck.length).toEqual(42);
   });
-
 });
