@@ -109,3 +109,13 @@ export function isBrelan(hand: Card[]): boolean {
 
   return Object.values(ranksCount).includes(3);
 }
+
+export function isCarre(hand: Card[]): boolean {
+  const ranksCount: { [key in Rank]: number } = { '2': 0, '3': 0, '4': 0, '5': 0, '6': 0, '7': 0, '8': 0, '9': 0, '10': 0, 'Valet': 0, 'Dame': 0, 'Roi': 0, 'As': 0 };
+
+  hand.forEach(card => {
+    ranksCount[card.rank]++;
+  });
+
+  return Object.values(ranksCount).includes(4);
+}

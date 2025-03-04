@@ -1,4 +1,4 @@
-import { initDeck, Card, ranks, colors, shuffleDeck, distribution, Player, rankValues, isOnePair, isTwoPair, isBrelan } from "./poker";
+import { initDeck, Card, ranks, colors, shuffleDeck, distribution, Player, rankValues, isOnePair, isTwoPair, isBrelan, isCarre } from "./poker";
 import { describe, it, expect } from '@jest/globals';
 
 describe('verify the cards', () => {
@@ -90,7 +90,8 @@ describe('verify values of card', () => {
       {color: 'Trèfle', rank: '10', value: 10}, 
       {color: 'Pique', rank: 'As', value: 14}, 
       {color: 'Carreau', rank: 'Valet', value: 11}, 
-      {color: 'Carreau', rank: '2', value: 2}]}
+      {color: 'Carreau', rank: '2', value: 2}]};
+
   const player2: Player = {
     id: 2, 
     cards: [
@@ -98,7 +99,8 @@ describe('verify values of card', () => {
       {color: 'Pique', rank: 'Roi', value: 13}, 
       {color: 'Pique', rank: 'As', value: 14}, 
       {color: 'Pique', rank: 'Valet', value: 11}, 
-      {color: 'Pique', rank: '10', value: 10}]}
+      {color: 'Pique', rank: '10', value: 10}]};
+
   const player3: Player = {
     id: 3,
     cards: [
@@ -106,7 +108,8 @@ describe('verify values of card', () => {
       {color: 'Pique', rank: '4', value: 4}, 
       {color: 'Pique', rank: '3', value: 3}, 
       {color: 'Pique', rank: 'As', value: 14}, 
-      {color: 'Pique', rank: '2', value: 2}]}
+      {color: 'Pique', rank: '2', value: 2}]};
+
   const player4: Player = { 
     id: 4, 
     cards: [
@@ -115,6 +118,7 @@ describe('verify values of card', () => {
       {color: 'Pique', rank: '5', value: 5}, 
       {color: 'Cœur', rank: '5', value: 5}, 
       {color: 'Trèfle', rank: 'As', value: 14}]};
+
   const player5: Player = { 
     id: 5, 
     cards: [
@@ -123,6 +127,15 @@ describe('verify values of card', () => {
       { color: 'Pique', rank: '7', value: 7 },
       { color: 'Cœur', rank: '2', value: 2 },
       { color: 'Carreau', rank: 'Valet', value: 11 }]};
+
+    const player6: Player = { 
+      id: 6, 
+      cards: [
+        { color: 'Carreau', rank: '7', value: 7 }, 
+        { color: 'Trèfle', rank: '7', value: 7 },
+        { color: 'Pique', rank: '7', value: 7 },
+        { color: 'Cœur', rank: '7', value: 7 },
+        { color: 'Carreau', rank: 'Valet', value: 11 }]};
 
   it('Should return true if it is a pair', () => {
     const hand1 = player1.cards;
@@ -155,6 +168,17 @@ describe('verify values of card', () => {
   it('Should return false if it is not a brelan', () => {
     const hand1 = player1.cards;
     expect(isBrelan(hand1)).toBe(false);
+  })
+
+  it('Should return true if it is a carre', () => {
+    const hand6 = player6.cards;
+    
+    expect(isCarre(hand6)).toBe(true);
+  });
+
+  it('Should return false if it is not a carre', () => {
+    const hand1 = player1.cards;
+    expect(isCarre(hand1)).toBe(false);
   })
 });
 
