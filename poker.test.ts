@@ -1,4 +1,4 @@
-import { initDeck, Card, ranks, colors, shuffleDeck, distribution, Player, rankValues, isOnePair, isTwoPair, isBrelan, isCarre, isFull } from "./poker";
+import { initDeck, Card, ranks, colors, shuffleDeck, distribution, Player, rankValues, isOnePair, isTwoPair, isBrelan, isCarre, isFull, isStraightHand } from "./poker";
 import { describe, it, expect } from '@jest/globals';
 
 describe('verify the cards', () => {
@@ -146,6 +146,14 @@ describe('verify values of card', () => {
       { color: 'Cœur', rank: '7', value: 7 }, 
       { color: 'Carreau', rank: '7', value: 7 }]};
 
+  const player8: Player = { 
+  id: 8, 
+  cards: [
+    { color: 'Carreau', rank: '5', value: 5 }, 
+    { color: 'Trèfle', rank: '6', value: 6 },
+    { color: 'Pique', rank: '7', value: 7 },
+    { color: 'Cœur', rank: '8', value: 8 },
+    { color: 'Carreau', rank: '9', value: 9 }]};
 
   it('Should return true if it is a pair', () => {
     const hand1 = player1.cards;
@@ -156,7 +164,7 @@ describe('verify values of card', () => {
   it('Should return false if it is not a pair', () => {
     const hand2 = player2.cards;
     expect(isOnePair(hand2)).toBe(false);
-  })
+  });
 
   it('Should return true if it is a two pairs', () => {
     const hand4 = player4.cards;
@@ -167,7 +175,7 @@ describe('verify values of card', () => {
   it('Should return false if it is not a two pairs', () => {
     const hand2 = player2.cards;
     expect(isTwoPair(hand2)).toBe(false);
-  })
+  });
 
   it('Should return true if it is a brelan', () => {
     const hand5 = player5.cards;
@@ -178,7 +186,7 @@ describe('verify values of card', () => {
   it('Should return false if it is not a brelan', () => {
     const hand1 = player1.cards;
     expect(isBrelan(hand1)).toBe(false);
-  })
+  });
 
   it('Should return true if it is a carre', () => {
     const hand6 = player6.cards;
@@ -189,18 +197,27 @@ describe('verify values of card', () => {
   it('Should return false if it is not a carre', () => {
     const hand1 = player1.cards;
     expect(isCarre(hand1)).toBe(false);
-  })
+  });
 
   it('Should return true if it is a full', () => {
     const hand7 = player7.cards;
-    
     expect(isFull(hand7)).toBe(true);
   });
 
   it('Should return false if it is not a full', () => {
     const hand1 = player1.cards;
     expect(isFull(hand1)).toBe(false);
-  })
+  });
+
+  it('Should return true if it is a full', () => {
+    const hand8 = player8.cards;
+    expect(isStraightHand(hand8)).toBe(true);
+  });
+
+  it('Should return false if it is not a full', () => {
+    const hand1 = player1.cards;
+    expect(isStraightHand(hand1)).toBe(false);
+  });
 
 });
 

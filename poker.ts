@@ -130,3 +130,13 @@ export function isFull(hand: Card[]): boolean {
   const values = Object.values(ranksCount);
   return values.includes(3) && values.includes(2);
 }
+
+export function isStraightHand(hand: Card[]): boolean {
+  const sortedHand = hand.sort((a, b) => b.value - a.value);
+  for (let i = 1; i < sortedHand.length; i++) {
+    if (sortedHand[i].value !== sortedHand[i - 1].value - 1) {
+      return false;
+    }
+  }
+  return true;
+}
