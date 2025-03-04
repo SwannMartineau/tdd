@@ -157,3 +157,19 @@ export function isRoyalFlush(hand: Card[]): boolean {
 
   return isFlush && sortedHand[0].rank === 'As' && sortedHand[1].rank === 'Roi' && sortedHand[2].rank === 'Dame' && sortedHand[3].rank === 'Valet' && sortedHand[4].rank === '10';
 }
+
+export function evaluateHand(hand: Card[]): { score: number, egalite: number[] } {
+  const sortedHand = hand.sort((a, b) => b.value - a.value);
+  
+  if (isRoyalFlush(hand)) return { score: 10, egalite: sortedHand.map(card => card.value) };
+  if (isStraightHand(hand) && isCouleur(hand)) return { score: 9, egalite: sortedHand.map(card => card.value) };
+  if (isCarre(hand)) return { score: 8, egalite: sortedHand.filter(card => card.rank === sortedHand[0].rank).map(card => card.value) };
+  if (isFull(hand)) return { score: 7, egalite: sortedHand.map(card => card.value) };
+  if (isCouleur(hand)) return { score: 6, egalite: sortedHand.map(card => card.value) };
+  if (isStraightHand(hand)) return { score: 5, egalite: sortedHand.map(card => card.value) };
+  if (isBrelan(hand)) return { score: 4, egalite: sortedHand.filter(card => card.rank === sortedHand[0].rank).map(card => card.value) };
+  if (isTwoPair(hand)) return { score: 3, egalite: sortedHand.map(card => card.value) };
+  if (isOnePair(hand)) return { score: 2, egalite: sortedHand.map(card => card.value) };
+  
+  return { score: 1, egalite: sortedHand.map(card => card.value) };
+}
