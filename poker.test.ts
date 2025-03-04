@@ -1,4 +1,4 @@
-import { initDeck, Card, ranks, colors, shuffleDeck, distribution, Player, rankValues, isOnePair, isTwoPair } from "./poker";
+import { initDeck, Card, ranks, colors, shuffleDeck, distribution, Player, rankValues, isOnePair, isTwoPair, isBrelan } from "./poker";
 import { describe, it, expect } from '@jest/globals';
 
 describe('verify the cards', () => {
@@ -115,6 +115,14 @@ describe('verify values of card', () => {
       {color: 'Pique', rank: '5', value: 5}, 
       {color: 'Cœur', rank: '5', value: 5}, 
       {color: 'Trèfle', rank: 'As', value: 14}]};
+  const player5: Player = { 
+    id: 5, 
+    cards: [
+      { color: 'Carreau', rank: '7', value: 7 }, 
+      { color: 'Trèfle', rank: '7', value: 7 },
+      { color: 'Pique', rank: '7', value: 7 },
+      { color: 'Cœur', rank: '2', value: 2 },
+      { color: 'Carreau', rank: 'Valet', value: 11 }]};
 
   it('Should return true if it is a pair', () => {
     const hand1 = player1.cards;
@@ -136,6 +144,17 @@ describe('verify values of card', () => {
   it('Should return false if it is not a two pairs', () => {
     const hand2 = player2.cards;
     expect(isTwoPair(hand2)).toBe(false);
+  })
+
+  it('Should return true if it is a brelan', () => {
+    const hand5 = player5.cards;
+    
+    expect(isBrelan(hand5)).toBe(true);
+  });
+
+  it('Should return false if it is not a brelan', () => {
+    const hand1 = player1.cards;
+    expect(isBrelan(hand1)).toBe(false);
   })
 });
 
