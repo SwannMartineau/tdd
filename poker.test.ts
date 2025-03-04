@@ -1,4 +1,4 @@
-import { initDeck, Card, ranks, colors, shuffleDeck, distribution, Player, rankValues, isOnePair, isTwoPair, isBrelan, isCarre, isFull, isStraightHand, isCouleur } from "./poker";
+import { initDeck, Card, ranks, colors, shuffleDeck, distribution, Player, rankValues, isOnePair, isTwoPair, isBrelan, isCarre, isFull, isStraightHand, isCouleur, isRoyalFlush } from "./poker";
 import { describe, it, expect } from '@jest/globals';
 
 describe('verify the cards', () => {
@@ -104,11 +104,11 @@ describe('verify values of card', () => {
   const player3: Player = {
     id: 3,
     cards: [
-      {color: 'Pique', rank: '5', value: 5}, 
-      {color: 'Pique', rank: '4', value: 4}, 
-      {color: 'Pique', rank: '3', value: 3}, 
       {color: 'Pique', rank: 'As', value: 14}, 
-      {color: 'Pique', rank: '2', value: 2}]};
+      {color: 'Pique', rank: 'Roi', value: 13}, 
+      {color: 'Pique', rank: 'Dame', value: 12}, 
+      {color: 'Pique', rank: 'Valet', value: 11}, 
+      {color: 'Pique', rank: '10', value: 10}]};
 
   const player4: Player = { 
     id: 4, 
@@ -218,24 +218,34 @@ describe('verify values of card', () => {
     expect(isFull(hand1)).toBe(false);
   });
 
-  it('Should return true if it is a full', () => {
+  it('Should return true if it is a suite', () => {
     const hand8 = player8.cards;
     expect(isStraightHand(hand8)).toBe(true);
   });
 
-  it('Should return false if it is not a full', () => {
+  it('Should return false if it is not a suite', () => {
     const hand1 = player1.cards;
     expect(isStraightHand(hand1)).toBe(false);
   });
 
-  it('Should return true if it is a full', () => {
+  it('Should return true if it is a couleur', () => {
     const hand9 = player9.cards;
     expect(isCouleur(hand9)).toBe(true);
   });
 
-  it('Should return false if it is not a full', () => {
+  it('Should return false if it is not a couleur', () => {
     const hand1 = player1.cards;
     expect(isCouleur(hand1)).toBe(false);
+  });
+
+  it('Should return true if it is a royal flush', () => {
+    const hand3 = player3.cards;
+    expect(isRoyalFlush(hand3)).toBe(true);
+  });
+
+  it('Should return false if it is not a royal flush', () => {
+    const hand1 = player1.cards;
+    expect(isRoyalFlush(hand1)).toBe(false);
   });
 });
 

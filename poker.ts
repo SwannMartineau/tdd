@@ -150,3 +150,10 @@ export function isCouleur(hand: Card[]): boolean {
 
   return Object.values(colorsCount).includes(5);
 }
+
+export function isRoyalFlush(hand: Card[]): boolean {
+  const sortedHand = hand.sort((a, b) => b.value - a.value);
+  const isFlush = isCouleur(hand);
+
+  return isFlush && sortedHand[0].rank === 'As' && sortedHand[1].rank === 'Roi' && sortedHand[2].rank === 'Dame' && sortedHand[3].rank === 'Valet' && sortedHand[4].rank === '10';
+}
