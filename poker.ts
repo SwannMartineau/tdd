@@ -185,4 +185,6 @@ export function comparePlayers(player1: Player, player2: Player): Player {
     if (hand1.egalite[i] > hand2.egalite[i]) return player1;
     if (hand1.egalite[i] < hand2.egalite[i]) return player2;
   }
+
+  return null;
 }
