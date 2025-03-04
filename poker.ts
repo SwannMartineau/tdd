@@ -173,3 +173,16 @@ export function evaluateHand(hand: Card[]): { score: number, egalite: number[] }
   
   return { score: 1, egalite: sortedHand.map(card => card.value) };
 }
+
+export function comparePlayers(player1: Player, player2: Player): Player {
+  const hand1 = evaluateHand(player1.cards);
+  const hand2 = evaluateHand(player2.cards);
+  
+  if (hand1.score > hand2.score) return player1;
+  if (hand1.score < hand2.score) return player2;
+  
+  for (let i = 0; i < 5; i++) {
+    if (hand1.egalite[i] > hand2.egalite[i]) return player1;
+    if (hand1.egalite[i] < hand2.egalite[i]) return player2;
+  }
+}

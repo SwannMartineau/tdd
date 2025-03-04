@@ -1,4 +1,4 @@
-import { initDeck, Card, ranks, colors, shuffleDeck, distribution, Player, rankValues, isOnePair, isTwoPair, isBrelan, isCarre, isFull, isStraightHand, isCouleur, isRoyalFlush, evaluateHand } from "./poker";
+import { initDeck, Card, ranks, colors, shuffleDeck, distribution, Player, rankValues, isOnePair, isTwoPair, isBrelan, isCarre, isFull, isStraightHand, isCouleur, isRoyalFlush, evaluateHand, comparePlayers } from "./poker";
 import { describe, it, expect } from '@jest/globals';
 
 describe('verify the cards', () => {
@@ -372,5 +372,11 @@ describe('verify values of a hand', () => {
     const hand3 = player3.cards;
     expect(evaluateHand(hand3).score).toEqual(10);
   });
+
+  it('should return player 3', () => {
+    const hand3 = player3.cards;
+    const hand6 = player6.cards;
+    expect(comparePlayers(player3, player6)).toEqual(player3);
+  })
 });
 
