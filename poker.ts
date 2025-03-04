@@ -6,6 +6,16 @@ export interface Card {
   color: Color;
 }
 
+export interface Player {
+    id: number;
+    cards: Card[];
+}
+
+export interface PokerGame {
+    players: Player[];
+    shuffledDeck: Card[];
+}
+
 export const colors: Color[] = ['Cœur', 'Carreau', 'Trèfle', 'Pique'];
 export const ranks: Rank[] = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'Valet', 'Dame', 'Roi', 'As'];
 
@@ -30,4 +40,22 @@ export function shuffleDeck(deck: Card[]): Card[] {
   }
 
   return shuffledDeck;
+}
+
+export function distribution(playersNumber: number): PokerGame {
+  let deck: Card[] = initDeck();
+  let shuffledDeck: Card[] = shuffleDeck(deck);
+  let players: Player[] = [];
+
+  for (let i = 0; i < playersNumber; i++) {
+    let player: Player = { id: i + 1, cards: [] };
+    for (let j = 0; j < 5; j++) {
+      player.cards.push(shuffledDeck.pop()!);
+    }
+    players.push(player);
+  }
+
+  const pokerGame: PokerGame = {players, shuffledDeck};
+
+  return pokerGame;
 }
