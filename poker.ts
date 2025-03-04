@@ -140,3 +140,13 @@ export function isStraightHand(hand: Card[]): boolean {
   }
   return true;
 }
+
+export function isCouleur(hand: Card[]): boolean {
+  const colorsCount: { [key in Color]: number } = { 'Cœur': 0, 'Carreau': 0, 'Trèfle': 0, 'Pique': 0 };
+
+  hand.forEach(card => {
+    colorsCount[card.color]++;
+  });
+
+  return Object.values(colorsCount).includes(5);
+}
