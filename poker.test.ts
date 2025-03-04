@@ -1,4 +1,4 @@
-import { initDeck, Card, ranks, colors, shuffleDeck, distribution, Player, rankValues, isOnePair } from "./poker";
+import { initDeck, Card, ranks, colors, shuffleDeck, distribution, Player, rankValues, isOnePair, isTwoPair } from "./poker";
 import { describe, it, expect } from '@jest/globals';
 
 describe('verify the cards', () => {
@@ -83,12 +83,38 @@ describe('verify the cards after distribution for a number of players', () => {
 
 describe('verify values of card', () => {
 
-  const player1: Player = {id: 1, cards: [{color: 'Carreau', rank: '10', value: 10}, {color: 'Trèfle', rank: '10', value: 10}, 
-    {color: 'Pique', rank: 'As', value: 14}, {color: 'Carreau', rank: 'Valet', value: 11}, {color: 'Carreau', rank: '2', value: 2}]}
-  const player2: Player = {id: 2, cards: [{color: 'Pique', rank: 'Dame', value: 12}, {color: 'Pique', rank: 'Roi', value: 13}, 
-    {color: 'Pique', rank: 'As', value: 14}, {color: 'Pique', rank: 'Valet', value: 11}, {color: 'Pique', rank: '10', value: 10}]}
-  const player3: Player = {id: 3, cards: [{color: 'Pique', rank: '5', value: 5}, {color: 'Pique', rank: '4', value: 4}, 
-    {color: 'Pique', rank: '3', value: 3}, {color: 'Pique', rank: 'As', value: 14}, {color: 'Pique', rank: '2', value: 2}]}
+  const player1: Player = {
+    id: 1, 
+    cards: [
+      {color: 'Carreau', rank: '10', value: 10}, 
+      {color: 'Trèfle', rank: '10', value: 10}, 
+      {color: 'Pique', rank: 'As', value: 14}, 
+      {color: 'Carreau', rank: 'Valet', value: 11}, 
+      {color: 'Carreau', rank: '2', value: 2}]}
+  const player2: Player = {
+    id: 2, 
+    cards: [
+      {color: 'Pique', rank: 'Dame', value: 12}, 
+      {color: 'Pique', rank: 'Roi', value: 13}, 
+      {color: 'Pique', rank: 'As', value: 14}, 
+      {color: 'Pique', rank: 'Valet', value: 11}, 
+      {color: 'Pique', rank: '10', value: 10}]}
+  const player3: Player = {
+    id: 3,
+    cards: [
+      {color: 'Pique', rank: '5', value: 5}, 
+      {color: 'Pique', rank: '4', value: 4}, 
+      {color: 'Pique', rank: '3', value: 3}, 
+      {color: 'Pique', rank: 'As', value: 14}, 
+      {color: 'Pique', rank: '2', value: 2}]}
+  const player4: Player = { 
+    id: 4, 
+    cards: [
+      {color: 'Trèfle', rank: '10', value: 10}, 
+      {color: 'Carreau', rank: '10', value: 10}, 
+      {color: 'Pique', rank: '5', value: 5}, 
+      {color: 'Cœur', rank: '5', value: 5}, 
+      {color: 'Trèfle', rank: 'As', value: 14}]};
 
   it('Should return true if it is a pair', () => {
     const hand1 = player1.cards;
@@ -99,6 +125,17 @@ describe('verify values of card', () => {
   it('Should return false if it is not a pair', () => {
     const hand2 = player2.cards;
     expect(isOnePair(hand2)).toBe(false);
+  })
+
+  it('Should return true if it is a two pairs', () => {
+    const hand4 = player4.cards;
+    
+    expect(isTwoPair(hand4)).toBe(true);
+  });
+
+  it('Should return false if it is not a two pairs', () => {
+    const hand2 = player2.cards;
+    expect(isTwoPair(hand2)).toBe(false);
   })
 });
 
