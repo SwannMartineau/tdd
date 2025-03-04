@@ -1,4 +1,4 @@
-import { initDeck, Card, ranks, colors, shuffleDeck, distribution, Player, rankValues, isOnePair, isTwoPair, isBrelan, isCarre } from "./poker";
+import { initDeck, Card, ranks, colors, shuffleDeck, distribution, Player, rankValues, isOnePair, isTwoPair, isBrelan, isCarre, isFull } from "./poker";
 import { describe, it, expect } from '@jest/globals';
 
 describe('verify the cards', () => {
@@ -137,6 +137,16 @@ describe('verify values of card', () => {
         { color: 'Cœur', rank: '7', value: 7 },
         { color: 'Carreau', rank: 'Valet', value: 11 }]};
 
+  const player7: Player = { 
+    id: 7, 
+    cards: [
+      { color: 'Carreau', rank: '10', value: 10 }, 
+      { color: 'Trèfle', rank: '10', value: 10 },
+      { color: 'Pique', rank: '10', value: 10 },
+      { color: 'Cœur', rank: '7', value: 7 }, 
+      { color: 'Carreau', rank: '7', value: 7 }]};
+
+
   it('Should return true if it is a pair', () => {
     const hand1 = player1.cards;
     
@@ -180,5 +190,17 @@ describe('verify values of card', () => {
     const hand1 = player1.cards;
     expect(isCarre(hand1)).toBe(false);
   })
+
+  it('Should return true if it is a full', () => {
+    const hand7 = player7.cards;
+    
+    expect(isFull(hand7)).toBe(true);
+  });
+
+  it('Should return false if it is not a full', () => {
+    const hand1 = player1.cards;
+    expect(isFull(hand1)).toBe(false);
+  })
+
 });
 
